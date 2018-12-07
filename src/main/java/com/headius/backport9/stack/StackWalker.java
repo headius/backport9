@@ -19,7 +19,7 @@ public interface StackWalker {
      <T> T walk(Function<? super Stream<StackFrame>, ? extends T> function);
 
      default <T> T walk(StackTraceElement[] trace, Function<? super Stream<StackFrame>, ? extends T> function) {
-         return StackWalker8.walkElements(trace, 0, trace.length - 1, function);
+         return StackWalker8.walkElements(trace, 0, trace.length, function);
      }
 
     interface StackFrame {

@@ -15,11 +15,11 @@ public class StackWalker8 implements StackWalker {
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 
         // start at 1 to remove this frame from the walk
-        return walkElements(stackTrace, 1, stackTrace.length - 1, function);
+        return walkElements(stackTrace, Math.min(1, stackTrace.length), stackTrace.length, function);
     }
 
-    public static <T> T walkElements(StackTraceElement[] trace, int startInclusive, int endInclusive, Function<? super Stream<StackFrame>, ? extends T> function) {
-        Stream<StackFrame> stream = Arrays.stream(trace, startInclusive, endInclusive).map(element -> new StackFrame8(element));
+    public static <T> T walkElements(StackTraceElement[] trace, int startInclusive, int endExclusive, Function<? super Stream<StackFrame>, ? extends T> function) {
+        Stream<StackFrame> stream = Arrays.stream(trace, startInclusive, endExclusive).map(element -> new StackFrame8(element));
         return function.apply(stream);
     }
 
