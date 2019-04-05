@@ -15,4 +15,16 @@ public class Module9 implements Module {
     public boolean isOpen(String pn) {
         return module.isOpen(pn);
     }
+
+    public boolean isOpen(String pn, Module other) {
+        return module.isOpen(pn, ((Module9) other).module);
+    }
+
+    public boolean isExported(String pn) {
+        return module.isExported(pn);
+    }
+
+    public void addOpens(String pn, Module other) {
+        module.addOpens(pn, ((Module9) other).module);
+    }
 }

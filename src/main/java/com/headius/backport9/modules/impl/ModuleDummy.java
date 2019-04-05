@@ -9,4 +9,16 @@ public class ModuleDummy implements Module {
     public boolean isOpen(String pn) {
         return true;
     }
+
+    public boolean isOpen(String pn, Module other) {
+        return isOpen(pn);
+    }
+
+    public boolean isExported(String pn) {
+        return true;
+    }
+
+    public void addOpens(String pn, Module other) {
+        return;
+    }
 }
