@@ -42,7 +42,7 @@ public class Modules {
 
     private static boolean checkOpen(final Module module, Class<?> declaringClass, AccessibleObject accessibleObject) {
         try {
-            if (module.isOpen(declaringClass.getPackage().getName())) {
+            if (module.isOpen(getPackageName(declaringClass))) {
                 accessibleObject.setAccessible(true);
                 return true;
             }
@@ -54,7 +54,7 @@ public class Modules {
 
     private static boolean checkOpen(final Module module, Class<?> declaringClass, AccessibleObject accessibleObject, final Module other) {
         try {
-            if (module.isOpen(declaringClass.getPackage().getName(), other)) {
+            if (module.isOpen(getPackageName(declaringClass), other)) {
                 accessibleObject.setAccessible(true);
                 return true;
             }
@@ -62,6 +62,11 @@ public class Modules {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private static String getPackageName(final Class<?> klass) {
+        Package pkg = klass.getPackage(); // default package is null on Java 8, returns (unnamed) package object on 11
+        return pkg == null ? "" : pkg.getName();
     }
 
     private static final boolean JAVA_NINE;
