@@ -17,6 +17,7 @@ public class Buffers {
      * @param buf the buffer
      * @param <T> any java.nio.Buffer type
      * @return the buffer
+     * @see Buffer#clear()
      */
     public static <T extends Buffer> T clearBuffer(T buf) {
         return (T) buf.clear();
@@ -28,6 +29,7 @@ public class Buffers {
      * @param buf the buffer
      * @param <T> any java.nio.Buffer type
      * @return the buffer
+     * @see Buffer#flip()
      */
     public static <T extends Buffer> T flipBuffer(T buf) {
         return (T) buf.flip();
@@ -37,8 +39,10 @@ public class Buffers {
      * Invoke Buffer.limit always using Buffer as the target, to avoid binary incompatibility on Java 8.
      *
      * @param buf the buffer
+     * @param limit the new limit
      * @param <T> any java.nio.Buffer type
      * @return the buffer
+     * @see Buffer#limit(int)
      */
     public static <T extends Buffer> T limitBuffer(T buf, int limit) {
         return (T) buf.limit(limit);
@@ -48,8 +52,10 @@ public class Buffers {
      * Invoke Buffer.position always using Buffer as the target, to avoid binary incompatibility on Java 8.
      *
      * @param buf the buffer
+     * @param limit the new limit
      * @param <T> any java.nio.Buffer type
      * @return the buffer
+     * @see Buffer#position()
      */
     public static <T extends Buffer> T positionBuffer(T buf, int limit) {
         return (T) buf.position(limit);
@@ -61,6 +67,7 @@ public class Buffers {
      * @param buf the buffer
      * @param <T> any java.nio.Buffer type
      * @return the buffer
+     * @see Buffer#mark()
      */
     public static <T extends Buffer> T markBuffer(T buf) {
         return (T) buf.mark();
