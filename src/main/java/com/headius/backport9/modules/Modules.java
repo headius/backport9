@@ -30,6 +30,10 @@ public class Modules {
         return trySetAccessible(accessibleMember.getDeclaringClass(), accessibleMember, modClass);
     }
 
+    public static boolean isOpen(Class target, Class caller) {
+        return target.getModule().isOpen(getPackageName(target), caller.getModule());
+    }
+
     private static boolean trySetAccessible(Class<?> declaringClass, AccessibleObject accessibleObject, Class<?> modClass) {
         if (accessibleObject.isAccessible()) return true;
 
