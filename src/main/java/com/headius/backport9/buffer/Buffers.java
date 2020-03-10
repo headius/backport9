@@ -72,4 +72,16 @@ public class Buffers {
     public static <T extends Buffer> T markBuffer(T buf) {
         return (T) buf.mark();
     }
+
+    /**
+     * Invoke Buffer.rewind always using Buffer as the target, to avoid binary incompatibility on Java 8.
+     *
+     * @param buf the buffer
+     * @param <T> any java.nio.Buffer type
+     * @return the buffer
+     * @see Buffer#rewind()
+     */
+    public static <T extends Buffer> T rewindBuffer(T buf) {
+        return (T) buf.rewind();
+    }
 }
