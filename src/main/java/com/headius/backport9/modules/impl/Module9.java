@@ -27,4 +27,12 @@ public class Module9 implements Module {
     public void addOpens(String pn, Module other) {
         module.addOpens(pn, ((Module9) other).module);
     }
+
+    public String toString() {
+        return module.toString();
+    }
+
+    public String getName() {
+        return module.getName();
+    }
 }

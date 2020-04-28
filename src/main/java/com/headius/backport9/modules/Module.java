@@ -7,4 +7,5 @@ public interface Module {
     boolean isOpen(String pn, Module other);
     boolean isExported(String pn);
     void addOpens(String pn, Module other);
+    String getName();
 }

@@ -21,4 +21,12 @@ public class ModuleDummy implements Module {
     public void addOpens(String pn, Module other) {
         return;
     }
+
+    public String toString() {
+        return "no module";
+    }
+
+    public String getName() {
+        return null;
+    }
 }
