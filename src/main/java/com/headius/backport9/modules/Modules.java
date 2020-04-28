@@ -37,16 +37,22 @@ public class Modules {
     private static boolean trySetAccessible(Class<?> declaringClass, AccessibleObject accessibleObject, Class<?> modClass) {
         if (accessibleObject.isAccessible()) return true;
 
-        Module module = getModule(declaringClass);
+        if (!JAVA_NINE) {
+            accessibleObject.setAccessible(true);
+            return true;
+        }
+
+        java.lang.Module module = declaringClass.getModule();
 
         return modClass == null ?
                 checkOpen(module, declaringClass, accessibleObject) :
-                checkOpen(module, declaringClass, accessibleObject, getModule(modClass));
+                checkOpen(module, declaringClass, accessibleObject, modClass.getModule());
     }
 
-    private static boolean checkOpen(final Module module, Class<?> declaringClass, AccessibleObject accessibleObject) {
+    private static boolean checkOpen(final java.lang.Module module, Class<?> declaringClass, AccessibleObject accessibleObject) {
         try {
-            if (module.isOpen(getPackageName(declaringClass))) {
+            String packageName = getPackageName(declaringClass);
+            if (module.isOpen(packageName)) {
                 accessibleObject.setAccessible(true);
                 return true;
             }
@@ -56,9 +62,14 @@ public class Modules {
         }
     }
 
-    private static boolean checkOpen(final Module module, Class<?> declaringClass, AccessibleObject accessibleObject, final Module other) {
+    private static boolean checkOpen(final java.lang.Module module, Class<?> declaringClass, AccessibleObject accessibleObject, final java.lang.Module other) {
         try {
-            if (module.isOpen(getPackageName(declaringClass), other)) {
+            String packageName = getPackageName(declaringClass);
+            if (module.isOpen(packageName, other)) {
+                if (!other.isNamed()) {
+                    // JDK internals always appear open to unnamed, so we must make it explicit
+                    module.addOpens(packageName, other);
+                }
                 accessibleObject.setAccessible(true);
                 return true;
             }
