@@ -22,6 +22,10 @@ public class ModuleDummy implements Module {
         return;
     }
 
+    public boolean isNamed() {
+        return false;
+    }
+
     public String toString() {
         return "no module";
     }

@@ -28,6 +28,10 @@ public class Module9 implements Module {
         module.addOpens(pn, ((Module9) other).module);
     }
 
+    public boolean isNamed() {
+        return module.isNamed();
+    }
+
     public String toString() {
         return module.toString();
     }
