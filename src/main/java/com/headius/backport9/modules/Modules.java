@@ -2,7 +2,6 @@ package com.headius.backport9.modules;
 
 import com.headius.backport9.modules.impl.Module9;
 import com.headius.backport9.modules.impl.ModuleDummy;
-import com.headius.backport9.platform.Detect;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Member;
