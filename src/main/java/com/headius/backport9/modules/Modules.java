@@ -45,11 +45,11 @@ public class Modules {
         java.lang.Module module = declaringClass.getModule();
 
         return modClass == null ?
-                checkOpen(module, declaringClass, accessibleObject) :
-                checkOpen(module, declaringClass, accessibleObject, modClass.getModule());
+                trySetAccessible(module, declaringClass, accessibleObject) :
+                trySetAccessible(module, declaringClass, accessibleObject, modClass.getModule());
     }
 
-    private static boolean checkOpen(final java.lang.Module module, Class<?> declaringClass, AccessibleObject accessibleObject) {
+    private static boolean trySetAccessible(final java.lang.Module module, Class<?> declaringClass, AccessibleObject accessibleObject) {
         try {
             String packageName = getPackageName(declaringClass);
             if (module.isOpen(packageName)) {
@@ -62,7 +62,7 @@ public class Modules {
         }
     }
 
-    private static boolean checkOpen(final java.lang.Module module, Class<?> declaringClass, AccessibleObject accessibleObject, final java.lang.Module other) {
+    private static boolean trySetAccessible(final java.lang.Module module, Class<?> declaringClass, AccessibleObject accessibleObject, final java.lang.Module other) {
         try {
             String packageName = getPackageName(declaringClass);
             if (module.isOpen(packageName, other)) {
