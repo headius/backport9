@@ -16,4 +16,9 @@ public class TestModules {
     public void testModuleGetName() {
         assertEquals(System.class.getModule().getName(), Modules.getModule(System.class).getName());
     }
+
+    @Test
+    public void testModulesIsExported() {
+        assertTrue(Modules.isExported(TestModules.class, TestModules.class));
+    }
 }

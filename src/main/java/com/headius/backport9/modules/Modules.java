@@ -31,7 +31,11 @@ public class Modules {
     }
 
     public static boolean isOpen(Class target, Class caller) {
-        return target.getModule().isOpen(getPackageName(target), caller.getModule());
+        return getModule(target).isOpen(getPackageName(target), getModule(caller));
+    }
+
+    public static boolean isExported(Class target, Class caller) {
+        return getModule(target).isExported(getPackageName(target), getModule(caller));
     }
 
     private static boolean trySetAccessible(Class<?> declaringClass, AccessibleObject accessibleObject, Class<?> modClass) {

@@ -24,6 +24,10 @@ public class Module9 implements Module {
         return module.isExported(pn);
     }
 
+    public boolean isExported(String pn, Module other) {
+        return module.isExported(pn, ((Module9) other).module);
+    }
+
     public void addOpens(String pn, Module other) {
         module.addOpens(pn, ((Module9) other).module);
     }

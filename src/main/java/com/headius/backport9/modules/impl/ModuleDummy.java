@@ -18,6 +18,10 @@ public class ModuleDummy implements Module {
         return true;
     }
 
+    public boolean isExported(String pn, Module other) {
+        return true;
+    }
+
     public void addOpens(String pn, Module other) {
         return;
     }
