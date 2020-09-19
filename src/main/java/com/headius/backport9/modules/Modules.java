@@ -37,9 +37,32 @@ public class Modules {
         return getModule(target).isExported(getPackageName(target), getModule(caller));
     }
 
-    private static boolean trySetAccessible(Class<?> declaringClass, AccessibleObject accessibleObject, Class<?> modClass) {
-        if (accessibleObject.isAccessible()) return true;
+    public static <M extends AccessibleObject & Member> boolean isAccessible(M member, Class<?> modClass) {
+        if (!JAVA_NINE) {
+            return member.isAccessible();
+        }
 
+        Class<?> declaringClass = member.getDeclaringClass();
+        java.lang.Module module = declaringClass.getModule();
+
+        return modClass == null ?
+                isAccessible(module, declaringClass) :
+                isAccessible(module, declaringClass, modClass.getModule());
+    }
+
+    private static boolean isAccessible(final java.lang.Module module, Class<?> declaringClass) {
+        String packageName = getPackageName(declaringClass);
+
+        return module.isOpen(packageName);
+    }
+
+    private static boolean isAccessible(final java.lang.Module module, Class<?> declaringClass, final java.lang.Module other) {
+        String packageName = getPackageName(declaringClass);
+
+        return module.isOpen(packageName, other);
+    }
+
+    private static boolean trySetAccessible(Class<?> declaringClass, AccessibleObject accessibleObject, Class<?> modClass) {
         if (!JAVA_NINE) {
             accessibleObject.setAccessible(true);
             return true;
