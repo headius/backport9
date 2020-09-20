@@ -4,7 +4,7 @@
 
     <groupId>com.headius</groupId>
     <artifactId>backport9</artifactId>
-    <version>1.10-SNAPSHOT</version>
+    <version>1.10</version>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
