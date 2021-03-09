@@ -10,10 +10,18 @@ import java.util.stream.Stream;
 public interface StackWalker {
     static StackWalker getInstance() {
         if (Detect.JAVA_NINE) {
-            return new StackWalker9();
+            return getInstance9();
         } else {
-            return new StackWalker8();
+            return getInstance8();
         }
+    }
+
+    static StackWalker getInstance8() {
+        return new StackWalker8();
+    }
+
+    static StackWalker getInstance9() {
+        return new StackWalker9();
     }
 
      <T> T walk(Function<? super Stream<StackFrame>, ? extends T> function);
