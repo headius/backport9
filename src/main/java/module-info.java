@@ -4,4 +4,5 @@ module com.headius.backport9 {
     exports com.headius.backport9.buffer;
     exports com.headius.backport9.modules;
     exports com.headius.backport9.stack;
+    exports com.headius.backport9.stack.impl;
 }
